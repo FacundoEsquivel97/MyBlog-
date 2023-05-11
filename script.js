@@ -1,24 +1,36 @@
 document.addEventListener('DOMContentLoaded',()=>{
-    const container = document.querySelector('.container')
+    const postContainer = document.querySelector('.post-container');
+    const postTemplate = document.querySelector('.post-template').content;
 
     const peticion = (endpoint,func) => {
         fetch('https://jsonplaceholder.typicode.com/'+endpoint)
         .then((response) => response.json())
-        .then((json) => {func(json.body)})
+        .then((json) => {func(json)})
+        .catch((error)=> {console.log(error)})
     }
     const renderPost = (data) =>{
-        //const clone = tmp.cloneNode(true);
-        //const fragment = document.createDocumentFragment();
-        let child = document.createElement('div')
-        child.innerHTML = data
-        child.className = 'post'
-        container.appendChild(child)
-        //fragment.appendChild(clone);
-        //container.appendChild(fragment);
+        const clone = postTemplate.cloneNode(true);
+        const fragment = document.createDocumentFragment();
+        clone.querySelector('.post-title').textContent = data.title ;
+        clone.querySelector('.post-body').textContent = data.body ;
+        peticion(`users/${data.userId}`,(user) => {
+            document.querySelectorAll('.post-user')[data.userId-1].textContent = user.username
+        })
+        fragment.appendChild(clone);
+        postContainer.appendChild(fragment);
     }
 
-   // for (let i = 1; i <= 5; i++) {
-     //   peticion(`posts/${i}`,renderPost)
-    //}
-    
+const sumarPost = () => {
+    let postsCount = localStorage.getItem("postsCount") || 100;
+    postsCount = JSON.parse(postsCount);
+    postsCount ++;
+    localStorage.setItem("postsCount", JSON.stringify(postsCount));
+}
+
+ for (let i = 1; i < postsCount; i += 10) {
+      peticion(`posts/${i}`,renderPost)
+    }
+
+
+
 });
