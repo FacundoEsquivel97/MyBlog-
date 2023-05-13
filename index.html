@@ -13,12 +13,13 @@
     <article>
         <div class="post-container">
         </div>
+        <form class="newPost">
+            <input type="text" placeholder="Titulo">
+            <input type="text" placeholder="Texto...">
+            <input type="submit">
+        </form>
         <div class="pagination"></div>
-            <form class="newPost">
-                <input type="text" placeholder="Titulo">
-                <input type="text" placeholder="Texto...">
-                <input type="submit">
-            </form>
+      
     </article>
     <section></section>
     <footer></footer>
@@ -27,8 +28,21 @@
                 <div class="post-title"></div>
                 <div  class="post-body"></div>
                 <div class="post-user"></div>
+                <div class="comments-container hide">
+                    <div class="comments"></div>
+                    <form class="newComment">
+                        <input type="text" placeholder="Comentario...">
+                        <input type="submit">
+                    </form>
+                </div>
             </div>
             </br>
     </template>
+    <template class="comment-template">
+        <div class="comment">
+            <div class="comment-user"></div>
+            <div class="comment-body"></div>
+        </div>
+</template>
 </body>
 </html>
