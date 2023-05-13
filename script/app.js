@@ -4,12 +4,12 @@ document.addEventListener('DOMContentLoaded',()=>{
     const commentTemplate = document.querySelector('.comment-template').content;
     const pagination = document.querySelector('.pagination');
     const newPost = document.querySelector('.newPost')
-    const newPostButton = newPost.children[2]
-    const newPostInputTitle = newPost.children[0]
-    const newPostInputText = newPost.children[1]
+    const newPostButton = newPost.querySelector('input[type=submit]')
+    const newPostInputTitle = newPost.querySelector('input[type=text]')
+    const newPostInputText = newPost.querySelector('textarea')
 
     let pageNumber = 0
-    const postsPerPage = 6;
+    const postsPerPage = 8;
 
     const peticion = (endpoint,func) => {
         fetch('https://jsonplaceholder.typicode.com/'+endpoint)
