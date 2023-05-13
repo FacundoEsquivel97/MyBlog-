@@ -20,11 +20,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 
     const renderPost = (post) =>{
         if (post !== undefined) {
-        postContainer.addEventListener('click',(e)=>{
-            e.stopImmediatePropagation()
-            let eventTarget = e.target.parentNode.childNodes[7].classList
-            eventTarget.toggle('hide')
-        });
+       
         const postClone = postTemplate.cloneNode(true);
         const postFragment = document.createDocumentFragment();
         let cloneUser = postClone.querySelector('.post-user')
@@ -34,15 +30,22 @@ document.addEventListener('DOMContentLoaded',()=>{
             cloneUser.textContent = user.username
         })
         const comments = postClone.querySelector('.comments');
+        const postComentCount = postClone.querySelector('.post-comments-count strong');
         peticion(`posts/${post.id}/comments`,(comment)=>{
+            postComentCount.textContent = comment.length; 
             for (let i = 0 ; i < comment.length; i++){
             const commentClone = commentTemplate.cloneNode(true);
-            const commentFragment = document.createDocumentFragment();  
+            const commentFragment = document.createDocumentFragment();
             commentClone.querySelector('.comment-user').textContent = comment[i].email;
             commentClone.querySelector('.comment-body').textContent = comment[i].body ;
             commentFragment.appendChild(commentClone);
             comments.appendChild(commentFragment);
             }
+        })
+        postClone.querySelector('.post-footer').addEventListener('click',(e)=>{
+                e.stopImmediatePropagation()
+                e.target.parentNode.classList.toggle('active');
+                e.target.parentNode.parentNode.childNodes[7].classList.toggle('hide')
         })
         postFragment.appendChild(postClone);
         postContainer.appendChild(postFragment);
@@ -63,7 +66,6 @@ document.addEventListener('DOMContentLoaded',()=>{
        
 
     const postNewPost = (titlePost,bodyPost) => {
-        console.log(titlePost,bodyPost)
         fetch('https://jsonplaceholder.typicode.com/posts', {
             method: 'POST',
             body: JSON.stringify({
