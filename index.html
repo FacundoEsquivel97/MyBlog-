@@ -11,36 +11,39 @@
 </head>
 <body>
     <header></header>
-    <article>
+    <article class="main">
         <div class="post-container">
         </div>
         <form class="newPost">
             <label>Nuevo post</label>
             <div class="newPostC">
-            <input type="text" placeholder="Titulo">
-            <textarea name="newPostBody" rows="8" placeholder="Escribe aquí tu nuevo post..."></textarea>
-            <input type="submit">
+            <input class="inputNewPostTitle" type="text" placeholder="Titulo">
+            <textarea class="inputNewPostBody" name="newPostBody" rows="8" placeholder="Escribe aquí tu nuevo post..."></textarea>
+            <input class="submitNewPost" type="submit">
             </div>
         </form>
         <div class="pagination"></div>
-      
     </article>
-    <section></section>
-    <footer></footer>
+    <section>
+    </section>
+    <footer>
+    </footer>
     <template class="post-template">
             <div class="post">
-                <div class="post-title"></div>
-                <div  class="post-body"></div>
-                <div class='post-footer'>
+                <div class="post-header">
+                    <div class="post-title"></div>
+                    <div class="goBack hide"> X </div>
+                </div><div class='post-data'>
                   <div class="post-comments-count"><strong></strong> Comentarios</div>
                   <div class="post-user"></div>
                 </div>
+                <div  class="post-body"></div>
                 
                 <div class="comments-container hide">
                     <div class="comments"></div>
                     <form class="newComment">
-                        <input type="text" placeholder="Comentario...">
-                        <input type="submit">
+                        <input class="inputComment" type="text" placeholder="Comentario...">
+                        <input class="commentSubmit" type="submit">
                     </form>
                 </div>
             </div>
