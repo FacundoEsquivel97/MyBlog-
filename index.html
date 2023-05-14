@@ -14,6 +14,7 @@
     <article class="main">
         <div class="post-container">
         </div>
+        <div class="pagination"></div>
         <form class="newPost">
             <label>Nuevo post</label>
             <div class="newPostC">
@@ -22,7 +23,7 @@
             <input class="submitNewPost" type="submit">
             </div>
         </form>
-        <div class="pagination"></div>
+        
     </article>
     <section>
     </section>
@@ -32,7 +33,7 @@
             <div class="post">
                 <div class="post-header">
                     <div class="post-title"></div>
-                    <div class="goBack hide"> X </div>
+                    <div><img  class="goBack hide" src="https://icongr.am/clarity/close.svg?size=30&color=#3f3f3f"></div>
                 </div><div class='post-data'>
                   <div class="post-comments-count"><strong></strong> Comentarios</div>
                   <div class="post-user"></div>
@@ -53,6 +54,12 @@
             <div class="comment-user"></div>
             <div class="comment-body"></div>
         </div>
-</template>
+    </template>
+    <template class="alert-template">
+        <div class="alert">
+            <div class="alertText"></div>
+            <img  class="alertButton" src="https://icongr.am/clarity/close.svg?size=30&color=#3f3f3f">
+        </div>
+    </template>
 </body>
 </html>

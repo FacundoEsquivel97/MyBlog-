@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     const postContainer = document.querySelector('.post-container');
     const postTemplate = document.querySelector('.post-template').content;
     const commentTemplate = document.querySelector('.comment-template').content;
+    const alertTemplate = document.querySelector('.alert-template').content;
     const pagination = document.querySelector('.pagination');
     const newPost = document.querySelector('.newPost')
     const newPostButton = newPost.querySelector('input[type=submit]')
@@ -17,7 +18,15 @@ document.addEventListener('DOMContentLoaded',()=>{
         .then((res) => {func(res)})
         .catch((error)=> {console.log(error)})
     }
-    
+    const mostrarAlerta = (mensaje) => {
+        const alertClone = alertTemplate.cloneNode(true);
+        const alertFragment = document.createDocumentFragment();
+        alertClone.querySelector('.alertText').textContent = mensaje;
+        alertClone.querySelector('.alertButton').addEventListener('click',(e) => {e.target.parentNode.remove()})
+        alertFragment.appendChild(alertClone);
+        main.appendChild(alertFragment);
+    }
+
     const openPost = (postId) => {
         main.innerHTML = '';
         peticion(`posts/${postId}`,(post)=>{
@@ -48,9 +57,11 @@ document.addEventListener('DOMContentLoaded',()=>{
             postClone.querySelector('.commentSubmit').addEventListener('click',(e)=> {
             e.preventDefault()
             if(e.target.parentNode.querySelector('.inputComment').value == ''){
-                alert('no puedes enviar un comentario vacio!')
+                mostrarAlerta('No puedes enviar un comentario vacio!')
             } else {
-            postNewComment(e.target.parentNode.querySelector('.inputComment').value,postId)}
+            postNewComment(e.target.parentNode.querySelector('.inputComment').value,postId)
+            mostrarAlerta('Comentario enviado!')
+            }
             e.target.parentNode.querySelector('.inputComment').value= '';
             })
             postFragment.appendChild(postClone);
@@ -134,10 +145,10 @@ document.addEventListener('DOMContentLoaded',()=>{
     newPostButton.addEventListener('click',(e)=>{
             e.preventDefault()
             if(newPostInputTitle.value == '' || newPostInputText.value == ''){
-                alert('no puedes enviar un post sin titulo o sin texto!')
-            }
+                mostrarAlerta('No puedes enviar un post sin titulo o sin texto!');}
             else {
-            postNewPost(newPostInputTitle.value,newPostInputText.value)}
+            postNewPost(newPostInputTitle.value,newPostInputText.value);
+            mostrarAlerta('Post enviado!');}
             newPostInputTitle.value = '';
             newPostInputText.value = '';
     })
