@@ -9,11 +9,28 @@ body {
 textarea {
   resize: none;
 }
-
+.headerNavbar{
+  color: #fafafa;
+  background-color: #1b1b1b;
+  font-size: 20px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 0.5rem 1rem;
+}
+.footerVar{
+  color: #1b1b1b;
+  background-color: #fafafa;
+  padding: 0.5rem 2rem;
+  font-size: 13px;
+  display: flex;
+  justify-content: space-between;
+align-items: center;
+}
 .hide {display:none}
 
 .main {
-  margin: 1rem 0rem;
+  margin: 2.5rem 0rem 1rem 0rem;
 }
 .post {
   border-radius: 15px;
@@ -174,9 +191,13 @@ padding: 0.5rem;
   margin:0.5rem 0rem;
 }
 @media (min-width: 900px) {
-  body {
+  .main {
     max-width: 1000px;
-    margin: auto;
+    margin: 2.5rem auto 1rem auto;
+  }
+  .headerNavbar{
+    left:0px
+  
   }
   input[type=submit]:hover {
     transition: color 0.5s, background-color 0.5s ;
